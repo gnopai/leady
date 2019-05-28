@@ -22,7 +22,7 @@ public class LeadyMain {
         this.gson = gson;
     }
 
-    public void processLeads(String inputFile, String outputFile) {
+    public void run(String inputFile, String outputFile) {
         LeadList leadList = readLeadsFromFile(inputFile);
         LeadList dedupedLeadList = leadDeduplicator.deduplicateLeads(leadList);
         writeLeadsToFile(dedupedLeadList, outputFile);
@@ -58,7 +58,7 @@ public class LeadyMain {
 
         String inputFileName = args.length >= 1 ? args[0] : "src/main/resources/sample_leads.json";
         String outputFileName = args.length >= 2 ? args[1] : "out/deduped_leads.json";
-        leadyMain.processLeads(inputFileName, outputFileName);
+        leadyMain.run(inputFileName, outputFileName);
         System.out.println("Results written to " + outputFileName);
     }
 }
