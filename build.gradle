@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+project.ext.version = System.env.VERSION_NUMBER ? System.env.VERSION_NUMBER : "0.0.1-dev"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.projectlombok:lombok:1.18.8')
+    compile('com.google.code.gson:gson:2.8.5')
+    compile('com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers:1.1.1')
+
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.4.2")
+    testCompile('org.mockito:mockito-core:2.27.0')
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+    }
+}
+
+jar.baseName = 'leady'
+jar {
+    manifest {
+        attributes("Implementation-Title": "contact-generator", "Implementation-Version": project.ext.version)
+    }
+}
+
+mainClassName = 'com.gnopai.leady.LeadyMain';
